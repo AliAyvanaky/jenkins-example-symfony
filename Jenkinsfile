@@ -5,9 +5,6 @@ pipeline {
   // tools {
   //   kubernetesCli 'kubectl'
   // }
-  environment {
-    KUBECONFIG_CREDENTIAL = credentials('kuber')
-  }
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
@@ -17,6 +14,7 @@ pipeline {
     IMAGE_NAME = 'ivanaki/jenkins-example-symfony'
     IMAGE_TAG = 'latest'
     APP_NAME = 'jenkins-example-symfony'
+    KUBECONFIG_CREDENTIAL = credentials('kuber')
   }
   stages {
   //   stage('Build') {
