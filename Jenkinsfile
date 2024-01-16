@@ -41,10 +41,15 @@ pipeline {
 
   stage('Deploy to Kubernetes') {
     steps {
-      script {
-          // Apply Kubernetes manifests
-        sh "kubectl --kubeconfig=$KUBECONFIG apply -f ./deployment.yaml"
-      }
+      // script {
+      //     // Apply Kubernetes manifests
+      //   sh "kubectl --kubeconfig=$KUBECONFIG apply -f ./deployment.yaml"
+      // }
+       kubernetesDeploy(
+           kubeconfigId: 'kubeconfig',
+           configs: 'deployment.yaml',
+           enableConfigSubstitution: true
+      )
     }
   }  
 }
