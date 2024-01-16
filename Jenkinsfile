@@ -2,6 +2,9 @@ pipeline {
   agent {
     label 'docker'
   }
+  tools {
+    kubernetesCli 'kubectl'
+  }
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
