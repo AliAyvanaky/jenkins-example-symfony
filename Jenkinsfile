@@ -2,9 +2,9 @@ pipeline {
   agent {
     label 'docker'
   }
-  tools {
-    kubernetesCli 'kubectl'
-  }
+  // tools {
+  //   kubernetesCli 'kubectl'
+  // }
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
