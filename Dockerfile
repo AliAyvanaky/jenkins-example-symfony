@@ -14,4 +14,5 @@ RUN sed -i -e "s/html/html\/public/g" /etc/apache2/sites-enabled/000-default.con
     && a2enmod rewrite \
     && sed -i "s/80/\${PORT}/g" /etc/apache2/sites-enabled/000-default.conf /etc/apache2/ports.conf
 ENTRYPOINT []
-CMD docker-php-entrypoint apache2-foreground
+CMD ["docker-php-entrypoint", "apache2-foreground", "-DFOREGROUND", "-e", "PORT=80"]
+#CMD docker-php-entrypoint apache2-foreground
