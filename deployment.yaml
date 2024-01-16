@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-example-symfony
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins-example-symfony
+  template:
+    metadata:
+      labels:
+        app: jenkins-example-symfony
+    spec:
+      containers:
+      - name: jenkins-example-symfony
+        image: ivanaki/jenkins-example-symfony:latest
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-example-symfony
+spec:
+  selector:
+    app: jenkins-example-symfony
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 33000  # Specify the NodePort value (any valid port number)
+  type: NodePort
+
