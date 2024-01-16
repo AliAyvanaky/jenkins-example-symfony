@@ -22,7 +22,7 @@ pipeline {
     }
   stage('Test') {
     steps {
-      sh 'docker run $IMAGE_NAME:$IMAGE_TAG php /bin/phpunit tests'
+      sh 'docker run $IMAGE_NAME:$IMAGE_TAG php vendor/bin/phpunit tests'
     }
   }
   stage('Publish to Docker Hub') {
