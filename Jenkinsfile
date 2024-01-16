@@ -20,11 +20,11 @@ pipeline {
         sh 'docker build -t $IMAGE_NAME:$IMAGE_TAG .'
       }
     }
-  // stage('Test') {
-  //   steps {
-  //     sh 'docker run $IMAGE_NAME:$IMAGE_TAG php vendor/bin/phpunit'
-  //   }
-  // }
+  stage('Test') {
+    steps {
+      sh 'docker run $IMAGE_NAME:$IMAGE_TAG php /bin/phpunit tests'
+    }
+  }
   stage('Publish to Docker Hub') {
     steps {
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
