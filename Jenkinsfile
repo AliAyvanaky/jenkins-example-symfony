@@ -5,6 +5,9 @@ pipeline {
   // tools {
   //   kubernetesCli 'kubectl'
   // }
+  environment {
+    KUBECONFIG_CREDENTIAL = credentials('kuber')
+  }
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
@@ -41,15 +44,11 @@ pipeline {
 
   stage('Deploy to Kubernetes') {
     steps {
-      script {
-          // Apply Kubernetes manifests
-        sh "kubectl apply -f ./deployment.yaml"
-      }
-      //  kubernetesDeploy(
-      //      kubeconfigId: 'kubeconfig',
-      //      configs: 'deployment.yaml',
-      //      enableConfigSubstitution: true
-      // )
+        withCredentials([file(credentialsId: 'kuber', variable: 'KUBECONFIG')]) {
+            script {
+                sh "kubectl --kubeconfig=$KUBECONFIG apply -f ./deployment.yaml"
+            }
+        }
     }
   }  
 }
