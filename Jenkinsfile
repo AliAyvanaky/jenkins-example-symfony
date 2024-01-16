@@ -12,6 +12,8 @@ pipeline {
   stages {
     stage('Build') {
       steps {
+        sh 'echo $PATH'
+        sh 'whoami'
         sh 'docker build -t $IMAGE_NAME:$IMAGE_TAG .'
       }
     }
