@@ -35,6 +35,15 @@ pipeline {
       }
     }
   }
+
+  stage('Deploy to Kubernetes') {
+    steps {
+      script {
+          // Apply Kubernetes manifests
+        sh "kubectl --kubeconfig=$KUBECONFIG apply -f ./deployment.yaml"
+      }
+    }
+  }  
 }
 }
 
