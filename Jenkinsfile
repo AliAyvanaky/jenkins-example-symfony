@@ -8,7 +8,7 @@ pipeline {
   environment {
     HEROKU_API_KEY = credentials('heroku-api-key') // Github
     DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials') // Docker Hub
-    IMAGE_NAME = 'darinpope/jenkins-example-symfony'
+    IMAGE_NAME = 'ivanaki/jenkins-example-symfony'
     IMAGE_TAG = 'latest'
     APP_NAME = 'jenkins-example-symfony'
   }
